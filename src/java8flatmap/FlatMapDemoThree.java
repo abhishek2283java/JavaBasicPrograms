@@ -28,6 +28,19 @@ public class FlatMapDemoThree {
 			
 		System.out.println("Distinct sorted list of project is = " + collect);
 		
+		List<String> collect2 = empList.stream()
+									.flatMap(emp -> emp.getProjects().stream())
+									.distinct()
+									.sorted()
+									.collect(Collectors.toList());
+		System.out.println("collect2 = " + collect2);
+		
+		//empList.forEach(emp -> System.out.println(emp));
+		
+		//Find all employees who have project = Python
+		System.out.println("Employees with project = python are");
+		empList.stream().filter(emp -> emp.getProjects().contains("Python")).forEach(System.out::println);
+		
 	}
 
 }
@@ -59,5 +72,10 @@ class EmployeeWithProjects {
 		this.id = id;
 		this.name = name;
 		this.projects = projects;
-	}	
+	}
+	@Override
+	public String toString() {
+		return "EmployeeWithProjects [id=" + id + ", name=" + name + ", projects=" + projects + "]";
+	}
+	
 }
